@@ -8,14 +8,20 @@
             * {
                 box-sizing: border-box;
             }
+
+            html,
             body {
-                margin: 0;git
-                height: 100vh;
+                margin: 0;
+                padding: 0;
+                height: 100%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
                 background: #f0f0f0;
                 font-family: Arial, sans-serif;
+                user-select: none;
+                -webkit-user-select: none;
+                -moz-user-select: none;
             }
 
             .scene {
@@ -69,12 +75,12 @@
 
         <script>
             const coin = document.getElementById("coin");
-            let flipped = false;
 
             coin.addEventListener("click", () => {
-                flipped = Math.random() < 0.5; // true = heads, false = tails
-                const rotation = flipped ? 0 : 180;
-                coin.style.transform = `rotateY(${1800 + rotation}deg)`;
+                const isHeads = Math.random() < 0.5;
+                const rotation = isHeads ? 0 : 180;
+                const randomSpins = Math.floor(Math.random() * 4 + 5) * 360; // Random extra spin
+                coin.style.transform = `rotateY(${randomSpins + rotation}deg)`;
             });
         </script>
     </body>
