@@ -10,7 +10,7 @@ let stats = {
 let isFlipping = false;
 
 function updateStatsDisplay() {
-  statsEl.textContent = `Total Flips: ${stats.total} | Heads: ${stats.heads} | Tails: ${stats.tails}`;
+  statsEl.textContent = `Flips: ${stats.total} • Heads: ${stats.heads} • Tails: ${stats.tails}`;
 }
 
 function saveStats() {
@@ -21,18 +21,18 @@ function saveStats() {
 
 coin.addEventListener("click", () => {
   if (isFlipping) return;
-
   isFlipping = true;
 
   const isHeads = Math.random() < 0.5;
   const rotation = isHeads ? 0 : 180;
-  const fullRotations = Math.floor(Math.random() * 3 + 6) * 360; // 6–8 full spins
-  const totalRotation = fullRotations + rotation;
+  const fixedRotation = 10 * 360; // Consistent number of spins (10 full spins)
+  const totalRotation = fixedRotation + rotation;
 
-  coin.style.transition = "transform 2.5s ease-in-out"; // force minimum duration
+  const duration = Math.random() * 3 + 2; // Random duration between 2–5 seconds
+
+  coin.style.transition = `transform ${duration.toFixed(2)}s ease-in-out`;
   coin.style.transform = `rotateY(${totalRotation}deg)`;
 
-  // Wait for the spin to complete (2.5s), then update stats
   setTimeout(() => {
     stats.total++;
     if (isHeads) stats.heads++;
@@ -40,9 +40,8 @@ coin.addEventListener("click", () => {
 
     saveStats();
     updateStatsDisplay();
-
     isFlipping = false;
-  }, 2500);
+  }, duration * 1000);
 });
 
 updateStatsDisplay();
