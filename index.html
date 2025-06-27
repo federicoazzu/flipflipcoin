@@ -15,6 +15,7 @@
                 padding: 0;
                 height: 100%;
                 display: flex;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 background: #f0f0f0;
@@ -63,6 +64,20 @@
                 background: crimson;
                 transform: rotateY(180deg);
             }
+
+            .stats {
+                margin-top: 20px;
+                font-size: 16px;
+                color: #333;
+                text-align: center;
+            }
+
+            footer {
+                margin-top: auto;
+                padding: 10px;
+                font-size: 14px;
+                color: #aaa;
+            }
         </style>
     </head>
     <body>
@@ -73,15 +88,51 @@
             </div>
         </div>
 
+        <div class="stats" id="stats">Total Flips: 0 | Heads: 0 | Tails: 0</div>
+
+        <footer>By Esben & Federico</footer>
+
         <script>
             const coin = document.getElementById("coin");
+            const statsEl = document.getElementById("stats");
+
+            // Load stats from localStorage or initialize
+            let stats = {
+                total: parseInt(localStorage.getItem("totalFlips")) || 0,
+                heads: parseInt(localStorage.getItem("headsCount")) || 0,
+                tails: parseInt(localStorage.getItem("tailsCount")) || 0,
+            };
+
+            function updateStatsDisplay() {
+                statsEl.textContent = `Total Flips: ${stats.total} | Heads: ${stats.heads} | Tails: ${stats.tails}`;
+            }
+
+            function saveStats() {
+                localStorage.setItem("totalFlips", stats.total);
+                localStorage.setItem("headsCount", stats.heads);
+                localStorage.setItem("tailsCount", stats.tails);
+            }
 
             coin.addEventListener("click", () => {
                 const isHeads = Math.random() < 0.5;
                 const rotation = isHeads ? 0 : 180;
-                const randomSpins = Math.floor(Math.random() * 4 + 5) * 360; // Random extra spin
-                coin.style.transform = `rotateY(${randomSpins + rotation}deg)`;
+                const spins = Math.floor(Math.random() * 4 + 5) * 360;
+
+                coin.style.transform = `rotateY(${spins + rotation}deg)`;
+
+                // Update stats
+                stats.total++;
+                if (isHeads) {
+                    stats.heads++;
+                } else {
+                    stats.tails++;
+                }
+
+                saveStats();
+                updateStatsDisplay();
             });
+
+            updateStatsDisplay();
         </script>
     </body>
 </html>
