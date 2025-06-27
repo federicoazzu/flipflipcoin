@@ -105,7 +105,7 @@ body {
     color: var(--text-color);
     font-size: 16px;
     font-weight: 500;
-    box-shadow: 0 2px 8px var(--shadow-color);
+
     transition: background 0.3s ease, color 0.3s ease;
     display: inline-block;
     user-select: none;
@@ -143,7 +143,7 @@ body.dark {
 /* ========================================================
    TOGGLE BUTTONS
 ======================================================== */
-#toggles {
+#stats-container {
     position: fixed;
     top: 20px;
     right: 20px;
@@ -153,22 +153,33 @@ body.dark {
     z-index: 1000;
 }
 
+#toggles {
+    position: fixed;
+    top: 20px;
+    left: 20px; /* change from right to left */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* change from flex-end to flex-start */
+    z-index: 1000;
+}
+
 #theme-toggle,
 #stats-toggle {
     margin: 5px 0;
     padding: 8px 16px;
     font-size: 16px;
     border: none;
-    border-radius: 8px;
+    border-radius: 999px;
     cursor: pointer;
-    background: #4b6cb7;
+    background: dodgerblue;
     color: white;
     transition: background 0.3s, transform 0.2s;
+
 }
 
 #theme-toggle:hover,
 #stats-toggle:hover {
-    background: #182848;
+    background: #1778d5;
     transform: scale(1.05);
 }
 
@@ -176,3 +187,25 @@ body.dark #theme-toggle,
 body.dark #stats-toggle {
     background: #333;
 }
+
+#reset-button {
+    margin: 5px 0;
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    background: #e74c3c;
+    color: white;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#reset-button:hover {
+    background: #c0392b;
+    transform: scale(1.05);
+}
+
+body.dark #reset-button {
+    background: #333;
+}
+
