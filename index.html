@@ -4,87 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Flip Flip Coin</title>
-        <style>
-            * {
-                box-sizing: border-box;
-            }
-
-            html,
-            body {
-                margin: 0;
-                padding: 0;
-                height: 100%;
-                background: #f0f0f0;
-                font-family: Arial, sans-serif;
-                user-select: none;
-                -webkit-user-select: none;
-                -moz-user-select: none;
-            }
-
-            .container {
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                height: 100%;
-                text-align: center;
-            }
-
-            .scene {
-                width: 200px;
-                height: 200px;
-                perspective: 1000px;
-            }
-
-            .coin {
-                width: 100%;
-                height: 100%;
-                position: relative;
-                transform-style: preserve-3d;
-                transition: transform 1s ease-in-out;
-                cursor: pointer;
-            }
-
-            .face {
-                position: absolute;
-                width: 100%;
-                height: 100%;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 24px;
-                font-weight: bold;
-                color: white;
-                backface-visibility: hidden;
-                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            }
-
-            .heads {
-                background: dodgerblue;
-                transform: rotateY(0deg);
-            }
-
-            .tails {
-                background: crimson;
-                transform: rotateY(180deg);
-            }
-
-            .stats {
-                margin-top: 20px;
-                font-size: 16px;
-                color: #333;
-            }
-
-            footer {
-                position: absolute;
-                bottom: 10px;
-                width: 100%;
-                text-align: center;
-                font-size: 14px;
-                color: #aaa;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css" />
     </head>
     <body>
         <div class="container">
@@ -94,49 +14,11 @@
                     <div class="face tails">Tails</div>
                 </div>
             </div>
-            <div class="stats" id="stats">
-                Total Flips: 0 | Heads: 0 | Tails: 0
-            </div>
+            <div class="stats" id="stats">Flips: 0 • Heads: 0 • Tails: 0</div>
         </div>
 
         <footer>By Esben & Federico</footer>
 
-        <script>
-            const coin = document.getElementById("coin");
-            const statsEl = document.getElementById("stats");
-
-            let stats = {
-                total: parseInt(localStorage.getItem("totalFlips")) || 0,
-                heads: parseInt(localStorage.getItem("headsCount")) || 0,
-                tails: parseInt(localStorage.getItem("tailsCount")) || 0,
-            };
-
-            function updateStatsDisplay() {
-                statsEl.textContent = `Total: ${stats.total} • Heads: ${stats.heads} • Tails: ${stats.tails}`;
-            }
-
-            function saveStats() {
-                localStorage.setItem("totalFlips", stats.total);
-                localStorage.setItem("headsCount", stats.heads);
-                localStorage.setItem("tailsCount", stats.tails);
-            }
-
-            coin.addEventListener("click", () => {
-                const isHeads = Math.random() < 0.5;
-                const rotation = isHeads ? 0 : 180;
-                const spins = Math.floor(Math.random() * 4 + 5) * 360;
-
-                coin.style.transform = `rotateY(${spins + rotation}deg)`;
-
-                stats.total++;
-                if (isHeads) stats.heads++;
-                else stats.tails++;
-
-                saveStats();
-                updateStatsDisplay();
-            });
-
-            updateStatsDisplay();
-        </script>
+        <script src="script.js"></script>
     </body>
 </html>
