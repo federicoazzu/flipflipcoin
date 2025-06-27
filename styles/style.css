@@ -1,0 +1,178 @@
+/* ========================================================
+   RESET & GLOBAL STYLES
+======================================================== */
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* ========================================================
+   CONTAINER & LAYOUT
+======================================================== */
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+}
+
+.scene {
+    width: 200px;
+    height: 200px;
+    perspective: 1000px;
+}
+
+/* ========================================================
+   COIN BASE STYLES
+======================================================== */
+.coin {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 2s cubic-bezier(0.32, 0.94, 0.6, 1);
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+/* ========================================================
+   COIN FACES
+======================================================== */
+.face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    backface-visibility: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset -2px -2px 4px rgba(255, 255, 255, 0.2),
+    inset 2px 2px 6px rgba(0, 0, 0, 0.3),
+    0 4px 10px rgba(0, 0, 0, 0.4);
+    background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.2), transparent),
+    radial-gradient(circle at 70% 70%, rgba(0, 0, 0, 0.1), transparent);
+    background-blend-mode: overlay;
+}
+
+.face::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at 30% 30%, rgba(255, 255, 255, 0.15), transparent 60%);
+    pointer-events: none;
+}
+
+.heads {
+    background-color: dodgerblue;
+    transform: rotateY(0deg);
+}
+
+.tails {
+    background-color: crimson;
+    transform: rotateY(180deg);
+}
+
+/* ========================================================
+   STATS DISPLAY
+======================================================== */
+.stats {
+    margin-top: 30px;
+    padding: 10px 20px;
+    border-radius: 999px;
+    background: var(--card-color);
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 2px 8px var(--shadow-color);
+    transition: background 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    user-select: none;
+}
+
+/* ========================================================
+   FOOTER
+======================================================== */
+footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+    color: var(--text-color);
+}
+
+/* ========================================================
+   THEME VARIABLES
+======================================================== */
+:root {
+    --bg-color: #f0f0f0;
+    --text-color: #333;
+    --card-color: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+body.dark {
+    --bg-color: #1e1e1e;
+    --text-color: #e0e0e0;
+    --card-color: #2a2a2a;
+    --shadow-color: rgba(255, 255, 255, 0.1);
+}
+
+/* ========================================================
+   TOGGLE BUTTONS
+======================================================== */
+#toggles {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    z-index: 1000;
+}
+
+#theme-toggle,
+#stats-toggle {
+    margin: 5px 0;
+    padding: 8px 16px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #4b6cb7;
+    color: white;
+    transition: background 0.3s, transform 0.2s;
+}
+
+#theme-toggle:hover,
+#stats-toggle:hover {
+    background: #182848;
+    transform: scale(1.05);
+}
+
+body.dark #theme-toggle,
+body.dark #stats-toggle {
+    background: #333;
+}
