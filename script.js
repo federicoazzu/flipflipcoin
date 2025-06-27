@@ -32,11 +32,13 @@ coin.addEventListener("click", () => {
   isFlipping = true;
 
   const isHeads = Math.random() < 0.5;
-  const rotationOffset = isHeads ? 3600 : 3780; // 10 or 10.5 spins
+  const spins = 1.5; // 1.5 full spins
+  const rotationOffset = isHeads ? spins * 360 : spins * 360 + 180;
+
   currentRotation += rotationOffset;
 
-  const duration = 1; // Always 2 seconds
-  coin.style.transition = `transform ${duration}s linear`;
+  const duration = 1; // 1 second spin
+  coin.style.transition = `transform ${duration}s cubic-bezier(0.4, 0, 0.2, 1)`; // smooth ease-out
   coin.style.transform = `rotateY(${currentRotation}deg)`;
 
   setTimeout(() => {
@@ -49,7 +51,6 @@ coin.addEventListener("click", () => {
     isFlipping = false;
   }, duration * 1000);
 });
-
 updateStatsDisplay();
 setInitialFace();
 
