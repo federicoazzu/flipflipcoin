@@ -1,28 +1,32 @@
 * {
     box-sizing: border-box;
-    margin: 0;
-    padding: 0;
 }
 
-html, body {
+html,
+body {
+    margin: 0;
+    padding: 0;
     height: 100%;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #ece9e6, #ffffff);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    background: #f0f0f0;
+    font-family: Arial, sans-serif;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
-    color: #333;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
 }
 
 .scene {
-    width: 220px;
-    height: 220px;
-    perspective: 1200px;
-    margin-bottom: 24px;
+    width: 200px;
+    height: 200px;
+    perspective: 1000px;
 }
 
 .coin {
@@ -30,10 +34,8 @@ html, body {
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 3s ease-in-out;
+    transition: transform 1s ease-in-out;
     cursor: pointer;
-    border-radius: 50%;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .face {
@@ -44,37 +46,34 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 28px;
-    font-weight: 600;
+    font-size: 24px;
+    font-weight: bold;
     color: white;
     backface-visibility: hidden;
-    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3),
-                0 10px 25px rgba(0, 0, 0, 0.2);
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(8px);
-    border: 2px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .heads {
-    background: linear-gradient(145deg, #1e90ff, #1c7ed6);
+    background: dodgerblue;
     transform: rotateY(0deg);
 }
 
 .tails {
-    background: linear-gradient(145deg, #dc143c, #c1121f);
+    background: crimson;
     transform: rotateY(180deg);
 }
 
-#stats {
-    font-size: 18px;
-    margin-bottom: 40px;
-    color: #555;
+.stats {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #333;
 }
 
 footer {
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
     font-size: 14px;
     color: #aaa;
-    text-align: center;
 }
