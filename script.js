@@ -1,5 +1,23 @@
 const coin = document.getElementById("coin");
 const statsEl = document.getElementById("stats");
+// Theme Toggle
+const toggleButton = document.getElementById("themeToggle");
+
+function setTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+}
+
+function toggleTheme() {
+  const currentTheme = document.documentElement.getAttribute("data-theme");
+  setTheme(currentTheme === "dark" ? "light" : "dark");
+}
+
+toggleButton.addEventListener("click", toggleTheme);
+
+// On load, apply saved theme or default to light
+const savedTheme = localStorage.getItem("theme") || "light";
+setTheme(savedTheme);
 
 let stats = {
   total: parseInt(localStorage.getItem("totalFlips")) || 0,

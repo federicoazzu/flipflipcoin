@@ -1,32 +1,28 @@
 * {
     box-sizing: border-box;
-}
-
-html,
-body {
     margin: 0;
     padding: 0;
+}
+
+html, body {
     height: 100%;
-    background: #f0f0f0;
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ece9e6, #ffffff);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     user-select: none;
     -webkit-user-select: none;
     -moz-user-select: none;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    text-align: center;
+    color: #333;
 }
 
 .scene {
-    width: 200px;
-    height: 200px;
-    perspective: 1000px;
+    width: 220px;
+    height: 220px;
+    perspective: 1200px;
+    margin-bottom: 24px;
 }
 
 .coin {
@@ -34,8 +30,10 @@ body {
     height: 100%;
     position: relative;
     transform-style: preserve-3d;
-    transition: transform 1s ease-in-out;
+    transition: transform 3s ease-in-out;
     cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .face {
@@ -46,34 +44,95 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 28px;
+    font-weight: 600;
     color: white;
     backface-visibility: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.3),
+                0 10px 25px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(8px);
+    border: 2px solid rgba(255, 255, 255, 0.4);
 }
 
 .heads {
-    background: dodgerblue;
+    background: linear-gradient(145deg, #1e90ff, #1c7ed6);
     transform: rotateY(0deg);
 }
 
 .tails {
-    background: crimson;
+    background: linear-gradient(145deg, #dc143c, #c1121f);
     transform: rotateY(180deg);
 }
 
-.stats {
-    margin-top: 20px;
-    font-size: 16px;
-    color: #333;
+#stats {
+    font-size: 18px;
+    margin-bottom: 40px;
+    color: #555;
 }
 
 footer {
     position: absolute;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
+    bottom: 20px;
     font-size: 14px;
     color: #aaa;
+    text-align: center;
+}
+
+/* DARK MODE */
+
+:root {
+    --bg: #ffffff;
+    --text: #333333;
+    --coin-heads: linear-gradient(145deg, #1e90ff, #1c7ed6);
+    --coin-tails: linear-gradient(145deg, #dc143c, #c1121f);
+    --stats-color: #555;
+    --footer-color: #aaa;
+}
+
+[data-theme="dark"] {
+    --bg: #1e1e1e;
+    --text: #f0f0f0;
+    --coin-heads: linear-gradient(145deg, #4680ff, #335ac0);
+    --coin-tails: linear-gradient(145deg, #ff4a5c, #b50000);
+    --stats-color: #ccc;
+    --footer-color: #666;
+}
+
+html, body {
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.4s, color 0.4s;
+}
+
+/* Existing styling below should use the variables */
+.heads {
+    background: var(--coin-heads);
+}
+
+.tails {
+    background: var(--coin-tails);
+}
+
+#stats {
+    color: var(--stats-color);
+}
+
+footer {
+    color: var(--footer-color);
+}
+
+/* Toggle switch styling */
+.theme-toggle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 14px;
+    padding: 6px 12px;
+    border: none;
+    background-color: var(--text);
+    color: var(--bg);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s;
 }
