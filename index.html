@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>3D Coin Flip</title>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                margin: 0;
+                height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background: #f0f0f0;
+                font-family: Arial, sans-serif;
+            }
+
+            .scene {
+                width: 200px;
+                height: 200px;
+                perspective: 1000px;
+            }
+
+            .coin {
+                width: 100%;
+                height: 100%;
+                position: relative;
+                transform-style: preserve-3d;
+                transition: transform 1s ease-in-out;
+                cursor: pointer;
+            }
+
+            .face {
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 24px;
+                font-weight: bold;
+                color: white;
+                backface-visibility: hidden;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            }
+
+            .heads {
+                background: dodgerblue;
+                transform: rotateY(0deg);
+            }
+
+            .tails {
+                background: crimson;
+                transform: rotateY(180deg);
+            }
+        </style>
+    </head>
+    <body>
+        <div class="scene">
+            <div class="coin" id="coin">
+                <div class="face heads">Heads</div>
+                <div class="face tails">Tails</div>
+            </div>
+        </div>
+
+        <script>
+            const coin = document.getElementById("coin");
+            let flipped = false;
+
+            coin.addEventListener("click", () => {
+                flipped = Math.random() < 0.5; // true = heads, false = tails
+                const rotation = flipped ? 0 : 180;
+                coin.style.transform = `rotateY(${1800 + rotation}deg)`;
+            });
+        </script>
+    </body>
+</html>
