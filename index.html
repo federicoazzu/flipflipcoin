@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>3D Coin Flip</title>
+        <title>Flip Flip Coin</title>
         <style>
             * {
                 box-sizing: border-box;
@@ -14,15 +14,20 @@
                 margin: 0;
                 padding: 0;
                 height: 100%;
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
                 background: #f0f0f0;
                 font-family: Arial, sans-serif;
                 user-select: none;
                 -webkit-user-select: none;
                 -moz-user-select: none;
+            }
+
+            .container {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                text-align: center;
             }
 
             .scene {
@@ -69,26 +74,30 @@
                 margin-top: 20px;
                 font-size: 16px;
                 color: #333;
-                text-align: center;
             }
 
             footer {
-                margin-top: auto;
-                padding: 10px;
+                position: absolute;
+                bottom: 10px;
+                width: 100%;
+                text-align: center;
                 font-size: 14px;
                 color: #aaa;
             }
         </style>
     </head>
     <body>
-        <div class="scene">
-            <div class="coin" id="coin">
-                <div class="face heads">Heads</div>
-                <div class="face tails">Tails</div>
+        <div class="container">
+            <div class="scene">
+                <div class="coin" id="coin">
+                    <div class="face heads">Heads</div>
+                    <div class="face tails">Tails</div>
+                </div>
+            </div>
+            <div class="stats" id="stats">
+                Total Flips: 0 | Heads: 0 | Tails: 0
             </div>
         </div>
-
-        <div class="stats" id="stats">Total Flips: 0 | Heads: 0 | Tails: 0</div>
 
         <footer>By Esben & Federico</footer>
 
@@ -96,7 +105,6 @@
             const coin = document.getElementById("coin");
             const statsEl = document.getElementById("stats");
 
-            // Load stats from localStorage or initialize
             let stats = {
                 total: parseInt(localStorage.getItem("totalFlips")) || 0,
                 heads: parseInt(localStorage.getItem("headsCount")) || 0,
@@ -104,7 +112,7 @@
             };
 
             function updateStatsDisplay() {
-                statsEl.textContent = `Total Flips: ${stats.total} | Heads: ${stats.heads} | Tails: ${stats.tails}`;
+                statsEl.textContent = `Total: ${stats.total} • Heads: ${stats.heads} • Tails: ${stats.tails}`;
             }
 
             function saveStats() {
@@ -120,13 +128,9 @@
 
                 coin.style.transform = `rotateY(${spins + rotation}deg)`;
 
-                // Update stats
                 stats.total++;
-                if (isHeads) {
-                    stats.heads++;
-                } else {
-                    stats.tails++;
-                }
+                if (isHeads) stats.heads++;
+                else stats.tails++;
 
                 saveStats();
                 updateStatsDisplay();
